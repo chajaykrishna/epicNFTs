@@ -11,7 +11,7 @@ const Search = () => {
   const alchemyApiKey = "CzOIcyajR6W0Pi2EtKSphKKeNxI_2y12" //dummy api key
 
   const loadItemsFromAlchemy = async() => {
-    const nftData = await axios.get(`https://eth-rinkeby.g.alchemy.com/v2/${alchemyApiKey}/getNFTs?owner=${userAddress}`).catch(err=>{console.log("error while fetching nfts"); return})
+    const nftData = await axios.get(`https://polygon-mumbai.g.alchemy.com/v2/${alchemyApiKey}/getNFTs?owner=${userAddress}`).catch(err=>{console.log("error while fetching nfts"); return})
     const items_ = nftData.data.ownedNfts;
     console.log(items_)
     const items = await Promise.all(items_.map(async i=>{

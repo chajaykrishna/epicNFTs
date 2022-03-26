@@ -2,11 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import {Row, Col, Card, Button} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 
 const MyListedItems = ({marketplace, nft, account}) => {
     const [items, setItems] = useState([]); 
     const [loading, setLoading] = useState(true);
+    const navigate= useNavigate();
 
     const loadMyitems =async ()=>{
       const items_ = await marketplace.getMyItems(account);
@@ -20,12 +22,17 @@ const MyListedItems = ({marketplace, nft, account}) => {
             description: meta.data.description,
             price: price,
             seller: i.seller,
-            staus: i.itemStatus
+            status: i.itemStatus,
+            itemId: i.itemId
           }
       return item;
       }))
       setItems(items)
       setLoading(false)
+    }
+
+    const reListNFT = (item) => {
+      navigate(`/relist`, {state: {item}});
     }
 
     useEffect(()=>{
@@ -55,12 +62,13 @@ const MyListedItems = ({marketplace, nft, account}) => {
                   </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-
                   <div className='d-grid'>
+                    {item.status == 1 ? 
                     <Button variant="primary" size="lg">
-                    {item.staus == 1 ?
-                     "listed" : "not listed"}
-                    </Button>
+                      listed </Button>
+                      : <Button variant="primary" size="lg" onClick={()=>reListNFT(item)}>
+                      Re-List </Button>
+                    }
                   </div>
                 </Card.Footer>
               </Card>

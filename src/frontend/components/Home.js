@@ -17,6 +17,7 @@ const Home = ({marketplace, nft}) => {
 //  function on call will load all listed nfts
   const loadMarketItems = async() => {
     const items_ = await marketplace.getListingItems();
+    console.log(items_)
     const items = await Promise.all(items_.map(async i=>{
       const uri = await nft.tokenURI(i.tokenId);
       const meta = await axios.get(uri);

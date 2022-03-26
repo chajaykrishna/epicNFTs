@@ -17,6 +17,7 @@ import Item from './Item';
 import { Spinner } from 'react-bootstrap';
 import PNF from './PNF';
 import Search from './Search';
+import ReList from './ReList';
  
 function App() {
   const [loading, setLoading] = useState(true);
@@ -83,7 +84,8 @@ function App() {
         <Route path = "/my-listed-items" element={<MyListedItems marketplace={marketplace} nft={nft} account={account}/>} />
         <Route path = "/popular-NFTs" element={<Features/>} />
         <Route path = "/item/:itemId" element={<Item/>}/>
-        <Route path = "/search/:userAddress" element={<Search/>}/>        
+        <Route path = "/search/:userAddress" element={<Search/>}/>
+        <Route path = "/relist" element={<ReList marketplace = {marketplace}/>}/>"       
         <Route path ="/*" element={<PNF/>}/>
       </Routes>)}
 

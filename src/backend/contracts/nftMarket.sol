@@ -139,19 +139,12 @@ contract NftMarketPlace is ReentrancyGuard {
         // IERC721(nftContract).safeTransferFrom(address(this), payable(msg.sender), idToMarketItem[itemId].tokenId);
 
         idToMarketItem[itemId].seller = msg.sender;
-        idToMarketItem[itemId].itemStatus = itemStatus_.available;
+        idToMarketItem[itemId].itemStatus = itemStatus_.sold;
         
         emit buyItem_(itemId, msg.sender, idToMarketItem[itemId].price, idToMarketItem[itemId].seller);
         // increment the unavailable counter
-        // unavailableItems.increment();
+        unavailableItems.increment();
     }
-
-    // function deleteUnlistedItem() internal {
-    //     uint totalItems = _itemIds.current();
-    //     for(uint i= 1; i<= totalItems; i++){
-    //         if 
-    //     }
-    // }
 
     function cancelListing(uint itemId) public nonReentrant {
         require(_exist(itemId),"itemId not avilable");
@@ -166,11 +159,12 @@ contract NftMarketPlace is ReentrancyGuard {
     }
 
     // list the cancelled nft again
-    function reListNfts(uint itemId) public nonReentrant{
+    function reListNfts(uint itemId, uint price) public nonReentrant{
         require(_exist(itemId),"itemId not avilable");
-        require(idToMarketItem[itemId].itemStatus != itemStatus_.available, "item not avilable for sale");
-        require(msg.sender == idToMarketItem[itemId].seller, "only seller can cancel the item");
+        require(idToMarketItem[itemId].itemStatus != itemStatus_.available, "item already listed");
+        require(msg.sender == idToMarketItem[itemId].seller, "only seller can relist the item");
         idToMarketItem[itemId].itemStatus = itemStatus_.available;
+        idToMarketItem[itemId].price = price;
         unavailableItems.decrement();
         emit relisted_(itemId,idToMarketItem[itemId].seller);
 
