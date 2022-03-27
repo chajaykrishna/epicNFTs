@@ -12,8 +12,8 @@ const ReList = ({marketplace}) => {
     const relist = async () => {
         console.log(marketplace.address)
         const itemprice = ethers.utils.parseEther(price.toString())
-        await marketplace.reListNfts(item.itemId, itemprice);
-        navigate(`/mylisteditems`);
+        await (await marketplace.reListNfts(item.itemId, itemprice)).wait();
+        navigate(`/my-listed-items`);
 
     }
 

@@ -86,10 +86,11 @@ contract NftMarketPlace is ReentrancyGuard {
     }
 
     function getListingItems() public view returns (MarketItem[] memory){
+        uint totalItems = _itemIds.current();
         uint totalavailableItems = _itemIds.current() - unavailableItems.current();
         MarketItem[] memory availableItems = new MarketItem[](totalavailableItems);
         uint tempCount= 0;
-        for (uint i=1; i<=totalavailableItems; i++){
+        for (uint i=1; i<=totalItems; i++){
             if(idToMarketItem[i].itemStatus == itemStatus_.available){
                 availableItems[tempCount] = idToMarketItem[i];
                 tempCount++;
@@ -138,9 +139,7 @@ contract NftMarketPlace is ReentrancyGuard {
         // if the nft need to get transfered to seller, then uncomment the below line
         // IERC721(nftContract).safeTransferFrom(address(this), payable(msg.sender), idToMarketItem[itemId].tokenId);
 
-        idToMarketItem[itemId].seller = msg.sender;
-        idToMarketItem[itemId].itemStatus = itemStatus_.sold;
-        
+        idToMarketItem[itemId].seller = msg.sender;        
         emit buyItem_(itemId, msg.sender, idToMarketItem[itemId].price, idToMarketItem[itemId].seller);
         // increment the unavailable counter
         unavailableItems.increment();

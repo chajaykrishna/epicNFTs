@@ -75,7 +75,7 @@ function App() {
       (
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh'}}>
           <Spinner animation="border" style={{diplay:'flex'}}/>
-          <p className='mx-3 my-0'>Awaiting Metamask Connection...</p>
+          <p className='mx-3 my-0'>Metamask Connection Required...</p>
             </div>
       )
       :(<Routes>
