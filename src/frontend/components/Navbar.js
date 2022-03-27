@@ -24,6 +24,7 @@ const Navigation = ({ web3Handler, account }) => {
                     <img src={market} width="40" height="40" className="" alt="" />
                     &nbsp; EPIC NFTS
                 </Navbar.Brand>
+                {/*"Icon made by srip from www.flaticon.com"  */}
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">

@@ -28,7 +28,7 @@ const ReList = ({marketplace}) => {
                 <Form.Control onChange={(e) => setPrice(e.target.value)} size="lg" required type="number" placeholder="Price in Matic" />
                 <div className="d-grid px-0">
                   <Button onClick={relist} variant="dark" size="lg">
-                    Re-List NFT!
+                    List NFT!
                   </Button>
                 </div>
               </Row>

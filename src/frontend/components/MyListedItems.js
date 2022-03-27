@@ -69,9 +69,9 @@ const MyListedItems = ({marketplace, nft, account}) => {
                   <div className='d-grid'>
                     {item.status == 1 ? 
                     <Button variant="outline-dark" size="lg" onClick={()=>unListNFT(item)}>
-                      Un-List </Button>
+                      Cancel Listing </Button>
                       : <Button variant="dark" size="lg" onClick={()=>reListNFT(item)}>
-                      Re-List </Button>
+                      sell </Button>
                     }
                   </div>
                 </Card.Footer>
