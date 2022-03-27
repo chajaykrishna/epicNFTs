@@ -33,6 +33,11 @@ const MyListedItems = ({marketplace, nft, account}) => {
     const reListNFT = (item) => {
       navigate(`/relist`, {state: {item}});
     }
+    // will change the status of the item to cancelled
+    const unListNFT = async (item) => {
+      await (await marketplace.cancelListing(item.itemId)).wait();
+      loadMyitems();
+    }
 
     useEffect(()=>{
       loadMyitems();
@@ -53,7 +58,7 @@ const MyListedItems = ({marketplace, nft, account}) => {
           {items.map((item, idx) => (
             <Col key={idx} className="overflow-hidden">
               <Card>
-                <Card.Img variant="top" src={item.image} style={{width: "100%",  height: "15rem", objectFit: "cover"}} />
+                <Card.Img variant="top" src={item.image} style={{width: "100%",  height: "20rem", objectFit: "cover"}} />
                 <Card.Body color="secondary">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>
@@ -63,9 +68,9 @@ const MyListedItems = ({marketplace, nft, account}) => {
                 <Card.Footer>
                   <div className='d-grid'>
                     {item.status == 1 ? 
-                    <Button variant="primary" size="lg">
-                      listed </Button>
-                      : <Button variant="outline-primary" size="lg" onClick={()=>reListNFT(item)}>
+                    <Button variant="outline-primary" size="lg" onClick={()=>unListNFT(item)}>
+                      Un-List </Button>
+                      : <Button variant="primary" size="lg" onClick={()=>reListNFT(item)}>
                       Re-List </Button>
                     }
                   </div>

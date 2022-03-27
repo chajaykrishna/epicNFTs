@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import {Row, Col, Card, Button, Spinner} from 'react-bootstrap'
 import axios from 'axios';
@@ -8,12 +8,12 @@ const Search = () => {
   const {userAddress} = useParams();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const alchemyApiKey = "CzOIcyajR6W0Pi2EtKSphKKeNxI_2y12" //dummy api key
+  const alchemyApiKey = "CzOIcyajR6W0Pi2EtKSphKKeNxI_2y12"
 
   const loadItemsFromAlchemy = async() => {
-    const nftData = await axios.get(`https://polygon-mumbai.g.alchemy.com/v2/${alchemyApiKey}/getNFTs?owner=${userAddress}`).catch(err=>{console.log("error while fetching nfts"); return})
+    setLoading(true);
+    const nftData = await axios.get(`https://polygon-mumbai.g.alchemy.com/v2/${alchemyApiKey}/getNFTs?owner=${userAddress}`)
     const items_ = nftData.data.ownedNfts;
-    console.log(items_)
     const items = await Promise.all(items_.map(async i=>{
       const uri = i.tokenUri.gateway;
       console.log(uri)
@@ -28,9 +28,9 @@ const Search = () => {
     setItems(items);
     setLoading(false);
   }
-  useState(()=>{
+  useEffect(()=>{
     loadItemsFromAlchemy();
-  },[])
+  }, [userAddress])
 
   if(loading){
     return (
@@ -48,7 +48,7 @@ const Search = () => {
           {items.map((item, idx) => (
             <Col key={idx} className="overflow-hidden">
               <Card>
-                <Card.Img variant="top" src={item.image} style={{width: "100%", height: "20vw", objectFit: "cover"}}/>
+                <Card.Img variant="top" src={item.image} style={{width: "100%", height: "20rem", objectFit: "cover"}}/>
                 <Card.Body color="secondary">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>

@@ -11,7 +11,7 @@ const Home = ({marketplace, nft}) => {
 
   // this function will route to item page 
   const itemSelected = (item) =>{
-    navigate("/item/itemId", {state: {item_data:item}});
+    // navigate("/item/itemId", {state: {item_data:item}});
   }
 //  function on call will load all listed nfts
   const loadMarketItems = async() => {
@@ -63,7 +63,7 @@ const Home = ({marketplace, nft}) => {
               <Card>
                 <Card.Img variant="top" onClick ={()=>itemSelected(item)}
                  src={item.image} 
-                 style={{width: "100%", height: "15rem", objectFit: "cover"}}/>
+                 style={{width: "100%", height: "20rem", objectFit: "cover"}}/>
                 <Card.Body color="secondary">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>
@@ -73,7 +73,7 @@ const Home = ({marketplace, nft}) => {
                 <Card.Footer>
                   <div className='d-grid'>
                     <Button onClick={() => buyItem(item)} variant="dark" size="lg">
-                      Buy for {(item.price)} ETH
+                      Buy for {(item.price)} Matic
                     </Button>
                   </div>
                 </Card.Footer>

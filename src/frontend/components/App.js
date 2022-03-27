@@ -29,7 +29,7 @@ function App() {
     const accounts = await window.ethereum.request({method: 'eth_accounts'});
     let chainId = await window.ethereum.request({ method: 'eth_chainId' });
     console.log("Connected to chain " + chainId);
-    if(accounts.length == 0){
+    if(accounts.length === 0){
       console.log('no authorised accounts found');
     }
     else {

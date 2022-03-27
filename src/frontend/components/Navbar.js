@@ -29,7 +29,7 @@ const Navigation = ({ web3Handler, account }) => {
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/">Home</Nav.Link>
                         <Nav.Link as={Link} to="/create">Create</Nav.Link>
-                        <Nav.Link as={Link} to="/my-listed-items">My Listed Items</Nav.Link>
+                        <Nav.Link as={Link} to="/my-listed-items">My Items</Nav.Link>
                         <Nav.Link as={Link} to="/popular-NFTs">popular NFTs</Nav.Link>
                     </Nav>
                     <Form className="d-flex" onSubmit={search}>
@@ -40,7 +40,6 @@ const Navigation = ({ web3Handler, account }) => {
                         aria-label="Search"
                         onChange={(e)=>setSearchAddress(e.target.value)}
                         />
-                        <input type="submit" style={{display: 'none'}} />
                     </Form>
                     <Nav>
                         {account ? (
