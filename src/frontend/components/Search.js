@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import {Row, Col, Card, Button, Spinner} from 'react-bootstrap'
+import {Row, Col, Card, Spinner, Badge} from 'react-bootstrap'
 import axios from 'axios';
 
 
@@ -41,9 +41,10 @@ const Search = () => {
   }
   return (
     <div className="flex justify-center">
-      {console.log(`items array length in return: ${items.length}`)}
+    {console.log(`items array length in return: ${items.length}`)}
     {items.length > 0 ?
       <div className="px-5 container">
+      <h3 style ={{padding:"1rem"}}>Other NFTs</h3>
         <Row xs={1} md={2} lg={4} className="g-4 py-5">
           {items.map((item, idx) => (
             <Col key={idx} className="overflow-hidden">

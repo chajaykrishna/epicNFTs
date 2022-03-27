@@ -1,7 +1,3 @@
-change redirect to etherscan
-add readme
-add appropriate comments
+checkout the live version here: 
 
-thoroughly check everthing
-change price in eth to matic / found in create,
-use a toast for user feedback
+Epic NFTs is a nft-marketplace where any user can mint, buy, sell, cancel, re-sell nfts. 
