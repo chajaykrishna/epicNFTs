@@ -4,7 +4,6 @@ import {Row, Col, Card, Button, Spinner} from 'react-bootstrap'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-
 const Home = ({marketplace, nft}) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +61,9 @@ const Home = ({marketplace, nft}) => {
           {items.map((item, idx) => (
             <Col key={idx} className="overflow-hidden">
               <Card>
-                <Card.Img variant="top" onClick ={()=>itemSelected(item)} src={item.image}/>
+                <Card.Img variant="top" onClick ={()=>itemSelected(item)}
+                 src={item.image} 
+                 style={{width: "100%", height: "15rem", objectFit: "cover"}}/>
                 <Card.Body color="secondary">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>
@@ -71,7 +72,7 @@ const Home = ({marketplace, nft}) => {
                 </Card.Body>
                 <Card.Footer>
                   <div className='d-grid'>
-                    <Button onClick={() => buyItem(item)} variant="primary" size="lg">
+                    <Button onClick={() => buyItem(item)} variant="dark" size="lg">
                       Buy for {(item.price)} ETH
                     </Button>
                   </div>

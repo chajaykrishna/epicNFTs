@@ -23,7 +23,7 @@ const ReList = ({marketplace}) => {
         <div className="row">
           <main role="main" className="col-lg-12 mx-auto" style={{ maxWidth: '1000px' }}>
             <div className="content mx-auto">
-              <img src={item.image} className="img-fluid" alt="..."/>
+              <img src={item.image} className="img-fluid" alt="" style={{width: "100%", height: "35vw", objectFit: "contain", padding: "3rem"}}/>
               <Row className="g-4">
                 <Form.Control onChange={(e) => setPrice(e.target.value)} size="lg" required type="number" placeholder="Price in Matic" />
                 <div className="d-grid px-0">

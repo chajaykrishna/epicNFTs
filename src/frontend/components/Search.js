@@ -48,7 +48,7 @@ const Search = () => {
           {items.map((item, idx) => (
             <Col key={idx} className="overflow-hidden">
               <Card>
-                <Card.Img variant="top" src={item.image}/>
+                <Card.Img variant="top" src={item.image} style={{width: "100%", height: "20vw", objectFit: "cover"}}/>
                 <Card.Body color="secondary">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>

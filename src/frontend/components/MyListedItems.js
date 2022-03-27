@@ -4,7 +4,6 @@ import { ethers } from 'ethers';
 import {Row, Col, Card, Button} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-
 const MyListedItems = ({marketplace, nft, account}) => {
     const [items, setItems] = useState([]); 
     const [loading, setLoading] = useState(true);
@@ -54,7 +53,7 @@ const MyListedItems = ({marketplace, nft, account}) => {
           {items.map((item, idx) => (
             <Col key={idx} className="overflow-hidden">
               <Card>
-                <Card.Img variant="top" src={item.image} />
+                <Card.Img variant="top" src={item.image} style={{width: "100%",  height: "15rem", objectFit: "cover"}} />
                 <Card.Body color="secondary">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text>
@@ -66,7 +65,7 @@ const MyListedItems = ({marketplace, nft, account}) => {
                     {item.status == 1 ? 
                     <Button variant="primary" size="lg">
                       listed </Button>
-                      : <Button variant="primary" size="lg" onClick={()=>reListNFT(item)}>
+                      : <Button variant="outline-primary" size="lg" onClick={()=>reListNFT(item)}>
                       Re-List </Button>
                     }
                   </div>
