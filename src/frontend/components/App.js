@@ -14,7 +14,7 @@ import MyListedItems from './MyListedItems';
 import Features from './Features';
 import Item from './Item';
 
-import { Spinner } from 'react-bootstrap';
+import { Spinner, ToastContainer, Toast } from 'react-bootstrap';
 import PNF from './PNF';
 import Search from './Search';
 import ReList from './ReList';
@@ -24,23 +24,45 @@ function App() {
   const [account, setAccount] = useState(null);
   const [nft, setNft] = useState({})
   const [marketplace, setMarketplace] = useState({})
+  const [toast, setToast] = useState(false);
 
   const walletConnect = async ()=> {
     const accounts = await window.ethereum.request({method: 'eth_accounts'});
     let chainId = await window.ethereum.request({ method: 'eth_chainId' });
     console.log("Connected to chain " + chainId);
-    if(accounts.length === 0){
-      console.log('no authorised accounts found');
+    if(chainId === "0x13881"){
+      if(accounts.length === 0){
+        console.log('no authorised accounts found');
+      }
+      else {
+        setAccount(accounts[0]);
+        console.log(`authorized account found: ${accounts[0]}`);
+        // get the contract instances
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer= provider.getSigner();
+        loadContracts(signer);
+      }
     }
+    
     else {
-      setAccount(accounts[0]);
-      console.log(`authorized account found: ${accounts[0]}`);
-      // get the contract instances
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer= provider.getSigner();
-      loadContracts(signer);
+      setToast(true);
     }
   }
+
+  const toastMsg = () => {
+    console.log("Please connect to the mumbai testnet");
+    return(
+      <ToastContainer position="middle-center" className>
+      <Toast>
+      <Toast.Header closeButton={false}>
+      <strong className="me-auto">Network Error!</strong>
+      </Toast.Header>
+        <Toast.Body>Change the Network to Mumbai Testnet and refresh the page.</Toast.Body>
+      </Toast>
+      </ToastContainer>
+    )
+  }
+
   const web3Handler = async ()=> {
 
     // request metamask for accounts list
@@ -71,12 +93,17 @@ function App() {
     <BrowserRouter>
     <div className='App'>
       <Navigation web3Handler={web3Handler} account = {account} />
-      {loading ?
+      {toast ? (toastMsg()): null};
+      ({loading ?
       (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh'}}>
+        <>
+        { (!toast) ? (
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh'}}>
           <Spinner animation="border" style={{diplay:'flex'}}/>
           <p className='mx-3 my-0'>Metamask Connection Required...</p>
             </div>
+         ): null}
+        </>
       )
       :(<Routes>
         <Route path="/" element = {<Home marketplace={marketplace} nft={nft}/>} />
