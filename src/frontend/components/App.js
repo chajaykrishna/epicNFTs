@@ -65,6 +65,7 @@ function App() {
 
   const web3Handler = async ()=> {
 
+    let chainId = await window.ethereum.request({ method: 'eth_chainId' });
     // request metamask for accounts list
     if(account == null) {
       const accounts = await window.ethereum.request({method: 'eth_requestAccounts'});
@@ -93,8 +94,8 @@ function App() {
     <BrowserRouter>
     <div className='App'>
       <Navigation web3Handler={web3Handler} account = {account} />
-      {toast ? (toastMsg()): null};
-      ({loading ?
+      {toast ? (toastMsg()): null}
+      {loading ?
       (
         <>
         { (!toast) ? (
